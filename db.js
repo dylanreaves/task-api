@@ -1,4 +1,6 @@
 const { Sequelize } = require("sequelize")
-const dbConn = new Sequelize("postgres://postgres:root@localhost:5432/task-api", {logging: false})
+require('dotenv').config();
+
+const dbConn = new Sequelize(process.env.DB_URL, {logging: false})
 
 module.exports = dbConn

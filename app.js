@@ -6,7 +6,7 @@ const { dbConn, UserModel, TaskModel } = require("./models");
 const app = express()
 const tasksRouter = require("./routes/tasks")
 const usersRouter = require("./routes/users");
-const PORT = 3000
+const PORT = process.env.PORT
 
 app.use(express.json())
 app.use(morgan('dev'))
