@@ -7,17 +7,25 @@ const router = express.Router()
 router.get("/", async (request, response, next) => {
     const params = request.params
     const query = request.query
+    console.log(query)
 
     try {
-        if (query) {
-            const email = query.email
+        const email = query.email
+        if (email) {
             const foundUser = await UserModel.findOne({
-                where: {email: email}
+                where: {email: email},
+                attributes: {
+                    exclude: ["password"],
+                }
             })
             return foundUser ? response.status(200).json(foundUser) : response.status(404).send("No user found.")
         }
 
-        const allUsers = await UserModel.findAll()
+        const allUsers = await UserModel.findAll({
+            attributes: {
+                exclude: ["password"],
+            }
+        })
         return response.status(200).json(allUsers)
     } catch(error) {
         next(error)

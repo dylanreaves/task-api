@@ -1,10 +1,10 @@
 const express = require("express")
 const morgan = require("morgan")
 const { dbConn, UserModel, TaskModel } = require("./models");
+
 const app = express()
 const tasksRouter = require("./routes/tasks")
 const usersRouter = require("./routes/users");
-const { logger } = require("sequelize/lib/utils/logger");
 const PORT = 3000
 
 app.use(express.json())
