@@ -53,7 +53,7 @@ router.get("/:id", async (request, response, next) => {
 function validateTask(request, response, next) {
     const title = request.body.title
     if (!title) {
-        response.status(400).send("Title is missing.")
+        return response.status(400).send("Title is missing.")
     }
     next()
 }

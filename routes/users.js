@@ -48,7 +48,7 @@ router.get("/:id/tasks", async (request, response, next) => {
             return userTasks ? response.status(200).json(userTasks) : response.status(404).send("No tasks found for user.")
         }
 
-        response.status(404).send("No user found.")
+        return response.status(404).send("No user found.")
     } catch(error) {
         next(error)
     }
