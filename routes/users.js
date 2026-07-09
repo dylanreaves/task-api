@@ -32,4 +32,26 @@ router.get("/", async (request, response, next) => {
     }
 })
 
+router.get("/:id/tasks", async (request, response, next) => {
+    const params = request.params
+    const id = Number(params.id)
+
+    try {
+        const foundUser = await UserModel.findByPk(id, {
+            attributes: {exclude: ["password"],}
+        })
+
+        if (foundUser) {
+            const userTasks = await TaskModel.findAll({
+                where: {userId: id}
+            })
+            return userTasks ? response.status(200).json(userTasks) : response.status(404).send("No tasks found.")
+        }
+
+        response.status(404).send("No user found.")
+    } catch(error) {
+        next(error)
+    }
+})
+
 module.exports = router

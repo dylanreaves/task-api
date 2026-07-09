@@ -13,7 +13,9 @@ router.get("/", async (request, response, next) => {
         // Object entries in where should be what you are trying to filter through in the database.
         const where = {}
         if (status) {
-            where.status = status
+            // Support multiple statuses by splitting.
+            const split = status.split(',')
+            where.status = {[Op.in]: split}
         }
         if (search) {
             where.title  = {[Op.iLike]: `%${search}%`}
