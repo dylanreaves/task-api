@@ -45,7 +45,7 @@ router.get("/:id/tasks", async (request, response, next) => {
             const userTasks = await TaskModel.findAll({
                 where: {userId: id}
             })
-            return userTasks ? response.status(200).json(userTasks) : response.status(404).send("No tasks found.")
+            return userTasks ? response.status(200).json(userTasks) : response.status(404).send("No tasks found for user.")
         }
 
         response.status(404).send("No user found.")
