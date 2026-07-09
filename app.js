@@ -1,5 +1,6 @@
 const express = require("express")
 const morgan = require("morgan")
+const cors = require("cors")
 const { dbConn, UserModel, TaskModel } = require("./models");
 
 const app = express()
@@ -9,6 +10,12 @@ const PORT = 3000
 
 app.use(express.json())
 app.use(morgan('dev'))
+app.use(cors())
+
+// function logger(request, response, next) {
+//     console.log(request.method, request.url)
+//     next()
+// }
 
 function errorHandler(error, request, response ,next) {
     console.error(error)
